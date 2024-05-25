@@ -1,4 +1,14 @@
 function summaryTable = processData(data)
+    % processData Function
+    % Processes the input data table by grouping and sorting chess openings.
+    % Checks for the required 'opening_name' column and handles missing values.
+    % Inputs:
+    %   data - Table containing chess game data.
+    % Outputs:
+    %   summaryTable - Table grouped by 'opening_name' and sorted by occurrence count.
+    % Throws:
+    %   error - If the 'opening_name' column is missing, contains missing values, or if an error occurs during grouping or sorting.
+
     % Check for the presence of the necessary column
     if ~ismember('opening_name', data.Properties.VariableNames)
         error('Data must include an "opening_name" column');
