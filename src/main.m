@@ -1,6 +1,5 @@
 % Load Data
-filename = 'data/games.csv';
-chessData = readtable(filename);
+chessData = loadData('../data/games.csv');
 
 % Group by opening_name and count the occurrences
 summaryTable = groupsummary(chessData, 'opening_name', 'IncludeMissingGroups', false);
@@ -21,8 +20,8 @@ xtickangle(45); % Rotate labels for better visibility
 grid on; % Enable grid for easier reading
 
 % Save the figure
-saveas(fig, 'results/MostCommonOpenings.png');
+saveas(fig, '../results/MostCommonOpenings.png');
 
 % Save the data to CSV
 topOpeningsData = sortedTable(1:10, :);
-writetable(topOpeningsData, 'results/MostCommonOpeningsData.csv');
+writetable(topOpeningsData, '../results/MostCommonOpeningsData.csv');
