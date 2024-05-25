@@ -15,6 +15,5 @@ csvPath = fullfile(resultsFolderPath, 'MostCommonOpeningsData.csv');
 % Plot and save the figure of the top 10 openings
 plotOpenings(processedData, figurePath);
 
-% Save the data to CSV
-topOpeningsData = processedData(1:10, :);
-writetable(topOpeningsData, '../results/MostCommonOpeningsData.csv');
+% Save the processed data to a CSV file
+saveResults(processedData(1:10, :), csvPath);
