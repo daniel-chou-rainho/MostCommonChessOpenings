@@ -1,4 +1,14 @@
 function data = loadData(filename)
+    % loadData Function
+    % Loads data from a specified CSV file into a table.
+    % Validates file existence, readability, and required columns.
+    % Inputs:
+    %   filename - String specifying the path to the CSV file.
+    % Outputs:
+    %   data - Table containing the loaded data.
+    % Throws:
+    %   error - If the file does not exist, cannot be read, or is missing required columns.
+
     % Check if the file exists
     if ~isfile(filename)
         error('File does not exist: %s', filename);
