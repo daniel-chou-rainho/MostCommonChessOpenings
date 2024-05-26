@@ -1,4 +1,4 @@
-function plotOpenings(summaryTable, savePath)
+function plotOpenings(summaryTable, savePath, visible)
     % plotOpenings Function
     % Plots the top 10 most common chess openings from the provided summary table.
     % Optionally saves the plot to a specified file path.
@@ -12,14 +12,18 @@ function plotOpenings(summaryTable, savePath)
 
     % Check for necessary data to plot
     if size(summaryTable, 1) < 10
-        error('Not enough data to plot top 10 openings');
+        error('MATLAB:plotOpenings:InsufficientData', 'Not enough data to plot top 10 openings');
     end
 
     % Create the categorical array from the sorted table to enforce the order in the plot
     categories = categorical(summaryTable.opening_name(1:10), summaryTable.opening_name(1:10), 'Ordinal', true);
 
-    % Create a new figure window
-    fig = figure;
+    % Create a new figure window with optional visibility
+    if nargin < 3 || visible
+        fig = figure;
+    else
+        fig = figure('Visible', 'off');
+    end
     
     % Plot the data
     bar(categories, summaryTable.GroupCount(1:10));
@@ -30,11 +34,11 @@ function plotOpenings(summaryTable, savePath)
     grid on; % Enable grid for easier reading
 
     % Check if save path is provided and save the figure
-    if nargin == 2 && ~isempty(savePath)
+    if nargin >= 2 && ~isempty(savePath)
         try
             saveas(fig, savePath);
         catch e
-            error('Failed to save the figure: %s', e.message);
+            error('MATLAB:plotOpenings:SaveFailed', 'Failed to save the figure: %s', e.message);
         end
     end
 end
